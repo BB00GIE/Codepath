@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var TipControl: UISegmentedControl!
     @IBOutlet weak var billField: UITextField!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tipLabel: UILabel!
@@ -25,14 +26,16 @@ class ViewController: UIViewController {
     @IBAction func CalcText(_ sender: Any) {
         //get bill
         let bill = Double(billField.text!) ?? 0
+        let tipPercentage = [0.15,0.18,0.2]
         
         //Calc tip and total
-        let tip = bill * 0.1
+        let tip = bill * tipPercentage[TipControl.selectedSegmentIndex]
         let total = bill + tip
         
         // Update tip and total amount
-        tipLabel.text = "$\(tip)"
-        totalLabel.text = "$\(total)"
+        tipLabel.text = String(format: "$%.2f",tip)
+        totalLabel.text = String(format: "$%.2f",total)
+        
     }
 }
 
