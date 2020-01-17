@@ -10,10 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var TipControl: UISegmentedControl!
     @IBOutlet weak var billField: UITextField!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tipLabel: UILabel!
+    let defaults = UserDefaults.standard
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -26,10 +26,10 @@ class ViewController: UIViewController {
     @IBAction func CalcText(_ sender: Any) {
         //get bill
         let bill = Double(billField.text!) ?? 0
-        let tipPercentage = [0.15,0.18,0.2]
+        let tipPercentage = defaults.double(forKey: "myTip")
         
         //Calc tip and total
-        let tip = bill * tipPercentage[TipControl.selectedSegmentIndex]
+        let tip = bill * tipPercentage
         let total = bill + tip
         
         // Update tip and total amount
