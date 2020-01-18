@@ -10,13 +10,22 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var DefaultTipField: UITextField!
+    let defaults = UserDefaults.standard
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // Do any additional setup after loading the view.
     }
     
 
+    @IBAction func ChangeDefaultTip(_ sender: Any) {
+        var tipPercent = Double(DefaultTipField.text!) ?? 0.1
+        tipPercent = tipPercent / 100
+        defaults.set(tipPercent, forKey: "myTip")
+        
+    }
     /*
     // MARK: - Navigation
 
